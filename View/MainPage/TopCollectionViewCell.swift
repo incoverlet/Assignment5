@@ -1,10 +1,3 @@
-//
-//  TopCollectionViewCell.swift
-//  BookSearching
-//
-//  Created by 이유진 on 5/2/24.
-//
-
 import UIKit
 import SnapKit
 
@@ -16,15 +9,12 @@ class TopCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         setupImageView()
-        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }
 
 extension TopCollectionViewCell {
@@ -44,26 +34,24 @@ extension TopCollectionViewCell {
             return view
         }()
         
+        // Add shadowView to contentView first
+        contentView.addSubview(shadowView)
+        
         shadowView.snp.makeConstraints { make in
             make.width.equalTo(123)
             make.height.equalTo(182)
+            make.center.equalToSuperview() // or set specific position
         }
         
+        // Configure and add topImageView to shadowView
         topImageView.backgroundColor = .myOrange
         topImageView.layer.cornerRadius = 10
         topImageView.layer.masksToBounds = true
         
-        topImageView.layer.shadowColor = UIColor.black.cgColor
-        topImageView.layer.shadowOffset = CGSize(width: 3, height: 3)
-        topImageView.layer.shadowOpacity = 0.1
-        topImageView.layer.shadowRadius = 4
+        shadowView.addSubview(topImageView)
         
         topImageView.snp.makeConstraints { make in
-            make.width.equalTo(123)
-            make.height.equalTo(182)
-        
-        contentView.addSubview(shadowView)
-            
+            make.edges.equalToSuperview()
         }
     }
 }
